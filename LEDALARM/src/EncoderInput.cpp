@@ -38,7 +38,6 @@ bool EncoderInput::buttonPressed() {
 
     if (digitalRead(buttonPin) == LOW) {
 
-        delay(20);
 
         if (digitalRead(buttonPin) == LOW) {
 

@@ -19,28 +19,36 @@ void clockBody::update() {
     if (minute >= 60) {
         minute = 0;
         hour ++;
+
+        if (hour == 12) {
+            AM_PM = !AM_PM;
+        }
     }
 
     if (hour > 12) {
         hour = 1;
-        AM_PM = !AM_PM;
     }
+    
 }
 
 void clockBody::initializeClock() {
-    hour = 0;
+    hour = 12;
     minute = 0;
     seconds = 0;
-    AM_PM = false;
+    AM_PM = true;
     lastTick = 0;
 }
 
 void clockBody::chooseHour(int inputHour) {
     hour = inputHour;
+    seconds = 0;
+    lastTick = millis();
 }
 
 void clockBody::chooseMinute(int inputMinute) {
     minute = inputMinute;
+    seconds = 0;
+    lastTick = millis();
 }
 
 void clockBody::chooseAM_PM(int inputAM_PM) {
@@ -51,6 +59,8 @@ void clockBody::chooseAM_PM(int inputAM_PM) {
     else {
         AM_PM = false;   //PM
     }
+    seconds = 0;
+    lastTick = millis();
 
 }
 
