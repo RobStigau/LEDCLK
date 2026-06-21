@@ -35,15 +35,15 @@ void clockBody::initializeClock() {
     lastTick = 0;
 }
 
-void clockBody::setHour(int inputHour) {
+void clockBody::chooseHour(int inputHour) {
     hour = inputHour;
 }
 
-void clockBody::setMinute(int inputMinute) {
+void clockBody::chooseMinute(int inputMinute) {
     minute = inputMinute;
 }
 
-void clockBody::setAM_PM(int inputAM_PM) {
+void clockBody::chooseAM_PM(int inputAM_PM) {
     if (inputAM_PM == 1) {
         AM_PM = true;   //AM
     }

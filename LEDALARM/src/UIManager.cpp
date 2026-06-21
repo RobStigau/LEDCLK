@@ -1,10 +1,6 @@
 #include "UIManager.h"
 
 
-
-
-
-
 UIManager::UIManager()
     : currentView(View::CLOCK_MENU),
       mainMenuIndex(0),
@@ -60,6 +56,7 @@ void UIManager::handleRotation(int direction) {
         case View::SET_CLOCK_MENU:
             if (settingHour) {
                 setHour += direction;
+                
 
             if (setHour < 0) {
                     setHour = 0;
@@ -189,7 +186,13 @@ void UIManager::handleRotation(int direction) {
 
 }
 
-void UIManager::handlePress() {
+void UIManager::setClockValues(clockBody& clockBody, int setHour, int setMinute, int setAM_PM) {
+    clockBody.chooseHour(setHour);
+    clockBody.chooseMinute(setMinute);
+    clockBody.chooseAM_PM(setAM_PM);
+}
+
+void UIManager::handlePress(clockBody& clock) {
     switch(currentView) {
 
         case View::MAIN_MENU:
@@ -209,6 +212,9 @@ void UIManager::handlePress() {
                 case 3:
                     currentView = View::COLOR_MENU;
                     break;
+                
+                case 4:
+                    currentView = View::SET_CLOCK_MENU;
                 
                 default:
                     break;
@@ -243,6 +249,7 @@ void UIManager::handlePress() {
                     settingHour = false;
                     settingMinute = false;
                     settingAM_PM = false;
+                    setClockValues(clock, setHour, setMinute, setAM_PM);
                     //applychanges
                     break;
 
@@ -415,7 +422,7 @@ void UIManager::handlePress() {
 void UIManager::moveMainMenu(int direction) {
     mainMenuIndex += direction;
 
-    int mainOptionCount = 4;
+    int mainOptionCount = 5;
 
     if (mainMenuIndex < 0) {
         mainMenuIndex = mainOptionCount - 1;

@@ -1,6 +1,7 @@
 #pragma once
 #include "View.h"
 #include "DisplayManager.h"
+#include "clockBody.h"
 
 
 class UIManager {
@@ -51,11 +52,11 @@ class UIManager {
 
         void handleRotation(int direction);
 
-        void handlePress();
+        void handlePress(clockBody& clock);
 
         void draw(DisplayManager& display);
 
-
+        void setClockValues(clockBody& clockBody, int setHour, int setMinute, int setAM_PM);
         void moveMainMenu(int direction);
 
         void moveSetClockMenu(int direction);

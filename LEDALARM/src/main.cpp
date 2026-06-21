@@ -39,7 +39,7 @@ void loop() {
   bool buttonPress = encoder->buttonPressed();
   if (buttonPress) {
     delay(100);
-    ui.handlePress();
+    ui.handlePress(ClockBody);
     ui.draw(display);
   }
 

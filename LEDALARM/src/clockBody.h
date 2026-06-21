@@ -17,11 +17,11 @@ class clockBody {
 
         void initializeClock();
 
-        void setHour(int inputHour);
+        void chooseHour(int inputHour);
         
-        void setMinute(int inputMinute);
+        void chooseMinute(int inputMinute);
 
-        void setAM_PM(int inputAM_PM);
+        void chooseAM_PM(int inputAM_PM);
 
 
 };
