@@ -9,9 +9,9 @@ class DisplayManager {
     public:
         DisplayManager();
 
-        void drawMainMenu(int menuIndex);
+        void drawMainMenu(int menuIndex, int hour, int minute, bool AM_PM);
 
-        void drawClock();
+        void drawClock(int hour, int minute, bool AM_PM);
 
 
         void begin();

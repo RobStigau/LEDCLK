@@ -82,14 +82,14 @@ void UIManager::handleRotation(int direction) {
 
 
             else if (settingAM_PM) {
-                AM_PM += direction;
+                setAM_PM += direction;
 
-                if(AM_PM < 0) {
-                    AM_PM = 0;
+                if(setAM_PM < 0) {
+                    setAM_PM = 0;
                 }
 
-                if(AM_PM > 1) {
-                    AM_PM = 1;
+                if(setAM_PM > 1) {
+                    setAM_PM = 1;
                 }
 
             } else {
@@ -215,6 +215,7 @@ void UIManager::handlePress(clockBody& clock) {
                 
                 case 4:
                     currentView = View::SET_CLOCK_MENU;
+                    break;
                 
                 default:
                     break;
@@ -491,16 +492,16 @@ void UIManager::moveColorMenu(int direction) {
 }
 
 
-void UIManager::draw(DisplayManager& display) {
+void UIManager::draw(DisplayManager& display, clockBody& clock) {
     //display.clear();
 
     switch (currentView) {
         case View::MAIN_MENU:
-            display.drawMainMenu(mainMenuIndex);
+            display.drawMainMenu(mainMenuIndex, clock.getHour(), clock.getMinute(), clock.getAM_PM());
             break;
 
         case View::CLOCK_MENU:
-            display.drawClock();
+            display.drawClock(clock.getHour(), clock.getMinute(), clock.getAM_PM());
             break;
 
         case View::SET_CLOCK_MENU:

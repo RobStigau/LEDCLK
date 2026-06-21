@@ -54,7 +54,7 @@ class UIManager {
 
         void handlePress(clockBody& clock);
 
-        void draw(DisplayManager& display);
+        void draw(DisplayManager& display, clockBody& clock);
 
         void setClockValues(clockBody& clockBody, int setHour, int setMinute, int setAM_PM);
         void moveMainMenu(int direction);

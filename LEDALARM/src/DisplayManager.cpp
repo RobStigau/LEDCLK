@@ -25,14 +25,34 @@ void DisplayManager::clear() {
     tft.fillScreen(TFT_BLACK);
 }
 
-void DisplayManager::drawClock() {
+void DisplayManager::drawClock(int hour, int minute, bool AM_PM) {
     tft.fillScreen(TFT_BLACK);
     tft.setTextDatum(MC_DATUM);
     tft.setTextFont(4);
     tft.setTextSize(4);
-    tft.drawString("1 1 : 3 7", 220, (64*2) + 32);
-    tft.setTextSize(1);
-    tft.drawString("AM", 420, (64*2));
+    if (hour < 10) {
+            if (minute < 10) {
+                tft.drawString("0 " + String(hour) + " : " + "0 " + String(minute), 220, 140);
+            }
+            else {
+            tft.drawString("0 " + String(hour) + " : " + String(minute), 220, 140);
+            }
+        }
+        else if (minute < 10) {
+            tft.drawString(String(hour) + " : " + "0 " + String(minute), 220, 140);
+
+        }
+        else {
+            tft.drawString(String(hour) + " : " + String(minute), 220, 140);
+        }
+        tft.setTextSize(1);
+        if (AM_PM) {
+            tft.drawString("AM", 420, 108);
+
+        } else {
+            tft.drawString("PM", 420, 108);
+        }
+
 }
 
 
@@ -303,17 +323,37 @@ void DisplayManager::drawSetClock(int setClockMenuIndex, int setHour, int setMin
 
 
 
-void DisplayManager::drawMainMenu(int menuIndex) {
+void DisplayManager::drawMainMenu(int menuIndex, int hour, int minute, bool AM_PM) {
     tft.fillScreen(TFT_BLACK);
     tft.setTextFont(4);
     tft.setTextSize(4);
-    tft.drawString("2:21", 160, 160);
+    if (hour < 10) {
+        if (minute < 10) {
+            tft.drawString("0 " + String(hour) + " : " + "0 " + String(minute), 160, 160);
+        }
+        else {
+        tft.drawString("0 " + String(hour) + " : " + String(minute), 160, 160);
+        }
+    }
+    else if (minute < 10) {
+        tft.drawString(String(hour) + " : " + "0 " + String(minute), 160, 160);
+
+    }
+    else {
+        tft.drawString(String(hour) + " : " + String(minute), 160, 160);
+    }
     tft.setTextSize(1);
-    tft.drawString("AM", 280, 128);
+    if (AM_PM) {
+        tft.drawString("AM", 280, 128);
+
+    } else {
+        tft.drawString("PM", 280, 128);
+    }
     tft.drawString("CLOCK", 400, 64);
     tft.drawString("ALARM", 400, 64*2);
     tft.drawString("BRIGHTNESS", 400, 64*3);
     tft.drawString("COLOR", 400, 64*4);
+    tft.drawString("SET CLOCK", 200, 64*4);
 
 
     switch(menuIndex) {
@@ -331,6 +371,10 @@ void DisplayManager::drawMainMenu(int menuIndex) {
 
         case 3:
             tft.drawString("----------", 400, 64*4 + 20);
+            break;
+
+        case 4:
+            tft.drawString("--------------", 200, 64*4 + 20);
             break;
 
 

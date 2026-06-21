@@ -23,5 +23,16 @@ class clockBody {
 
         void chooseAM_PM(int inputAM_PM);
 
+        int getHour() {
+            return hour;
+        }
+
+        int getMinute() {
+            return minute;
+        }
+        
+        bool getAM_PM() {
+            return AM_PM;
+        }
 
 };
