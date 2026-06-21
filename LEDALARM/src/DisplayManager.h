@@ -22,6 +22,8 @@ class DisplayManager {
         
         void drawAlarm(int AlarmMenuIndex, int hour, int minute, int AM_PM);
 
+        void drawSetClock(int SetClockMenuIndex, int setHour, int setMinute, int setAM_PM);
+
         void drawBrightness(int brightnessMenuIndex, int brightnessLevel, int timeToLight);
 
     

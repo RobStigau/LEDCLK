@@ -8,6 +8,7 @@
 UIManager::UIManager()
     : currentView(View::CLOCK_MENU),
       mainMenuIndex(0),
+      setClockMenuIndex(0),
       alarmMenuIndex(0),
       brightnessMenuIndex(0),
       colorMenuIndex(0),
@@ -26,7 +27,13 @@ UIManager::UIManager()
       colorThree(false),
       colorFour(false),
       colorFive(false),
-      colorSix(false)
+      colorSix(false),
+      settingHour(false),
+      settingMinute(false),
+      settingAM_PM(false),
+      setHour(0),
+      setMinute(0),
+      setAM_PM(0)
 
 {
 }
@@ -35,6 +42,7 @@ UIManager::UIManager()
 void UIManager::begin() {
     currentView = View::CLOCK_MENU;
     mainMenuIndex = 0;
+    setClockMenuIndex = 0;
     alarmMenuIndex = 0;
     brightnessMenuIndex = 0;
     colorMenuIndex = 0;
@@ -47,6 +55,50 @@ void UIManager::handleRotation(int direction) {
     switch(currentView) {
         case View::MAIN_MENU:
             moveMainMenu(direction);
+            break;
+
+        case View::SET_CLOCK_MENU:
+            if (settingHour) {
+                setHour += direction;
+
+            if (setHour < 0) {
+                    setHour = 0;
+                }
+
+                if (setHour > 12) {
+                    setHour = 12;
+                }
+            }
+
+            else if (settingMinute) {
+                setMinute += direction;
+
+                if (setMinute > 59) {
+                    setMinute = 59;
+                }
+
+                if (setMinute < 0) {
+                    setMinute = 0;
+                }
+            }
+
+
+
+            else if (settingAM_PM) {
+                AM_PM += direction;
+
+                if(AM_PM < 0) {
+                    AM_PM = 0;
+                }
+
+                if(AM_PM > 1) {
+                    AM_PM = 1;
+                }
+
+            } else {
+                moveSetClockMenu(direction);
+            }
+
             break;
 
         case View::ALARM_MENU:
@@ -165,6 +217,46 @@ void UIManager::handlePress() {
 
         case View::CLOCK_MENU:
             currentView = View::MAIN_MENU;
+            break;
+
+       case View::SET_CLOCK_MENU:
+            switch(setClockMenuIndex) {
+                case 0:
+                    settingHour = !settingHour;
+                    settingMinute = false;
+                    settingAM_PM = false;
+                    break;
+                
+                case 1:
+                    settingMinute = !settingMinute;
+                    settingHour = false;
+                    settingAM_PM = false;
+                    break;
+
+                case 2:
+                    settingAM_PM = !settingAM_PM;
+                    settingHour = false;
+                    settingMinute = false;
+                    break;
+
+                case 3:
+                    settingHour = false;
+                    settingMinute = false;
+                    settingAM_PM = false;
+                    //applychanges
+                    break;
+
+                case 4:
+                    setClockMenuIndex = 0;
+                    settingHour = false;
+                    settingMinute = false;
+                    settingAM_PM = false;
+                    currentView = View::MAIN_MENU;
+                    break;
+
+                default:
+                    break;
+            }
             break;
 
             
@@ -335,6 +427,22 @@ void UIManager::moveMainMenu(int direction) {
 
 }
 
+
+void UIManager::moveSetClockMenu(int direction) {
+    setClockMenuIndex += direction;
+
+    int setClockOptionCount = 5;
+
+    if (setClockMenuIndex < 0) {
+        setClockMenuIndex = setClockOptionCount - 1;
+    }
+
+    if (setClockMenuIndex >= setClockOptionCount) {
+        setClockMenuIndex = 0;
+    }
+}
+
+
 void UIManager::moveAlarmMenu(int direction) {
     alarmMenuIndex += direction;
 
@@ -386,6 +494,10 @@ void UIManager::draw(DisplayManager& display) {
 
         case View::CLOCK_MENU:
             display.drawClock();
+            break;
+
+        case View::SET_CLOCK_MENU:
+            display.drawSetClock(setClockMenuIndex, setHour, setMinute, setAM_PM);
             break;
 
         case View::ALARM_MENU:

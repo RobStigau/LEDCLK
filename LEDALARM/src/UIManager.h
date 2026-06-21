@@ -8,6 +8,7 @@ class UIManager {
         View currentView;
         int selectedIndex;
         int mainMenuIndex;
+        int setClockMenuIndex;
         int alarmMenuIndex;
         int brightnessMenuIndex;
         int colorMenuIndex;
@@ -33,6 +34,14 @@ class UIManager {
         bool colorFive;
         bool colorSix;
 
+        bool settingHour;
+        bool settingMinute;
+        bool settingAM_PM;
+
+        int setHour;
+        int setMinute;
+        int setAM_PM;
+
 
     public:
         UIManager();
@@ -48,6 +57,8 @@ class UIManager {
 
 
         void moveMainMenu(int direction);
+
+        void moveSetClockMenu(int direction);
 
         void moveAlarmMenu(int direction);
         void moveBrightnessMenu(int direction);

@@ -2,7 +2,11 @@
 
 enum class View {
     MAIN_MENU,
+
+
     CLOCK_MENU,
+
+    SET_CLOCK_MENU,
     ALARM_MENU,
     BRIGHTNESS_MENU,
     COLOR_MENU,
