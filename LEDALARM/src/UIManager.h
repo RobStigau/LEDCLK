@@ -66,4 +66,18 @@ class UIManager {
         void moveColorMenu(int direction);
 
 
+
+        int getAlarmHour() const;
+
+        int getAlarmMinute() const;
+
+        bool getAlarmAM_PM() const;
+
+        int getBrightnessLevel() const;
+
+        int getColor() const;
+
+        int getTimeToBright() const;
+
+
 };

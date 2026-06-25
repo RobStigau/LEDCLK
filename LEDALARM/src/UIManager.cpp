@@ -527,3 +527,46 @@ void UIManager::draw(DisplayManager& display, clockBody& clock) {
             break;
     }
 }
+
+
+
+int UIManager::getAlarmHour() const {
+    return hour;
+}
+
+
+int UIManager::getAlarmMinute() const {
+    return minute;
+}
+
+
+bool UIManager::getAlarmAM_PM() const {//////////////////////////////////
+    if (AM_PM == 1) {
+        return true;
+    }
+
+    else {
+        return false;
+    }
+}
+
+
+int UIManager::getBrightnessLevel() const {
+    return brightnessLevel;
+}
+
+
+int UIManager::getTimeToBright() const {
+    return timeToLight;
+}
+
+int UIManager::getColor() const {
+   if (colorOne) return 1;
+   if (colorTwo) return 2;
+   if (colorThree) return 3;
+   if (colorFour) return 4;
+   if (colorFive) return 5;
+   if (colorSix) return 6;
+
+   return 1;
+}

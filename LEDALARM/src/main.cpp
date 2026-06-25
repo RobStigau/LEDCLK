@@ -5,13 +5,14 @@
 #include "EncoderInput.h"
 #include "DisplayManager.h"
 #include "clockBody.h"
-
+#include "SendData.h"
 
 
 UIManager ui;
 EncoderInput* encoder;
 DisplayManager display;
 clockBody ClockBody;
+SendData sender;
 
 void setup() {
   Serial.begin(115200);
@@ -30,7 +31,26 @@ void setup() {
 
 void loop() {
   static int lastMinute = -1;
+
+  static bool alarmHasBeenSent = false;
+
   ClockBody.update();
+
+  if (ClockBody.getHour() == ui.getAlarmHour() &&
+      ClockBody.getMinute() == ui.getAlarmMinute() &&
+      ClockBody.getAM_PM() == ui.getAlarmAM_PM()) {
+        if (!alarmHasBeenSent) {
+          sender.send(ui.getColor(), 
+                      ui.getBrightnessLevel(),
+                      ui.getTimeToBright()
+          );
+          alarmHasBeenSent = true;
+        }
+      } else {
+        alarmHasBeenSent = false;
+      }
+
+
 
   int direction = encoder->getDirection();
 

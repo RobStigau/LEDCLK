@@ -1,5 +1,6 @@
 #include "clockBody.h"
 #include <Arduino.h>
+#include "SendData.h"
 
 clockBody::clockBody() {}
 
@@ -63,4 +64,3 @@ void clockBody::chooseAM_PM(int inputAM_PM) {
     lastTick = millis();
 
 }
-
