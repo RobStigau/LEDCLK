@@ -44,6 +44,9 @@ class UIManager {
         int setAM_PM;
 
 
+        bool alarmSent;
+
+
     public:
         UIManager();
 
@@ -65,6 +68,7 @@ class UIManager {
         void moveBrightnessMenu(int direction);
         void moveColorMenu(int direction);
 
+        void setView(View view);
 
 
         int getAlarmHour() const;
@@ -78,6 +82,8 @@ class UIManager {
         int getColor() const;
 
         int getTimeToBright() const;
+
+        bool isAlarmSent() const;
 
 
 };

@@ -29,7 +29,8 @@ UIManager::UIManager()
       settingAM_PM(false),
       setHour(0),
       setMinute(0),
-      setAM_PM(0)
+      setAM_PM(0),
+      alarmSent(true)
 
 {
 }
@@ -224,6 +225,11 @@ void UIManager::handlePress(clockBody& clock) {
 
         case View::CLOCK_MENU:
             currentView = View::MAIN_MENU;
+            break;
+
+        case View::ALARM_OFF_MENU:
+            currentView = View::MAIN_MENU;
+            alarmSent = false;
             break;
 
        case View::SET_CLOCK_MENU:
@@ -519,9 +525,16 @@ void UIManager::draw(DisplayManager& display, clockBody& clock) {
         case View::COLOR_MENU:
             display.drawColor(colorMenuIndex, colorOne, colorTwo, colorThree, colorFour, colorFive, colorSix);
             break;
+
+
+        case View::ALARM_OFF_MENU:
+            display.drawAlarmOff();
+            break;
         
         case View::MAIN_COUNT:
             break;
+
+        
 
         default:
             break;
@@ -569,4 +582,13 @@ int UIManager::getColor() const {
    if (colorSix) return 6;
 
    return 1;
+}
+
+bool UIManager::isAlarmSent() const {
+    return alarmSent;
+}
+
+
+void UIManager::setView(View newView) {
+    currentView = newView;
 }

@@ -55,7 +55,16 @@ void DisplayManager::drawClock(int hour, int minute, bool AM_PM) {
 
 }
 
+void DisplayManager::drawAlarmOff() {
+    tft.fillScreen(TFT_BLACK);
+    tft.setTextDatum(MC_DATUM);
+    tft.setTextFont(4);
+    tft.setTextSize(4);
+    tft.drawString("PRESS TO TURN OFF ALARM", 220, 140);
 
+
+
+}
 void DisplayManager::drawAlarm(int alarmMenuIndex, int hour, int minute, int AM_PM) {
     tft.fillScreen(TFT_BLACK);
     tft.setTextDatum(MC_DATUM);

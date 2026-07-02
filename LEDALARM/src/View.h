@@ -10,5 +10,6 @@ enum class View {
     ALARM_MENU,
     BRIGHTNESS_MENU,
     COLOR_MENU,
+    ALARM_OFF_MENU,
     MAIN_COUNT
 };

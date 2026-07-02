@@ -12,11 +12,14 @@ UIManager ui;
 EncoderInput* encoder;
 DisplayManager display;
 clockBody ClockBody;
-SendData sender;
+
+
+uint8_t receiverMac[] = {0x30, 0x76, 0xf5, 0x92, 0x80, 0x14};
+SendData sender(receiverMac);
 
 void setup() {
   Serial.begin(115200);
-
+  sender.begin();
   ClockBody.initializeClock();
 
   
@@ -32,25 +35,35 @@ void setup() {
 void loop() {
   static int lastMinute = -1;
 
-  static bool alarmHasBeenSent = false;
+  static int lastAlarmHour = -1;
+  static int lastAlarmMinute = -1;
+  static bool lastAlarmAM_PM = false;
 
   ClockBody.update();
 
-  if (ClockBody.getHour() == ui.getAlarmHour() &&
-      ClockBody.getMinute() == ui.getAlarmMinute() &&
-      ClockBody.getAM_PM() == ui.getAlarmAM_PM()) {
-        if (!alarmHasBeenSent) {
-          sender.send(ui.getColor(), 
-                      ui.getBrightnessLevel(),
-                      ui.getTimeToBright()
-          );
-          alarmHasBeenSent = true;
-        }
-      } else {
-        alarmHasBeenSent = false;
-      }
+  bool alarmTimeMatches = ClockBody.getHour() == ui.getAlarmHour() &&
+                          ClockBody.getMinute() == ui.getAlarmMinute() &&
+                          ClockBody.getAM_PM() == ui.getAlarmAM_PM();
 
+  bool alreadyTriggeredInMinute = lastAlarmHour == ClockBody.getHour() &&
+                                  lastAlarmMinute == ClockBody.getMinute() &&
+                                  lastAlarmAM_PM == ClockBody.getAM_PM();
 
+  if (alarmTimeMatches && !alreadyTriggeredInMinute) {
+    sender.send(
+      ui.getColor(),
+      ui.getBrightnessLevel(),
+      ui.getTimeToBright()
+    );
+
+    lastAlarmHour = ClockBody.getHour();
+    lastAlarmMinute = ClockBody.getMinute();
+    lastAlarmAM_PM = ClockBody.getAM_PM();
+
+    ui.setView(View::ALARM_OFF_MENU);
+    ui.draw(display, ClockBody);
+  }
+  
 
   int direction = encoder->getDirection();
 

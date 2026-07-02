@@ -37,7 +37,7 @@ void clockBody::initializeClock() {
     minute = 0;
     seconds = 0;
     AM_PM = true;
-    lastTick = 0;
+    lastTick = millis();
 }
 
 void clockBody::chooseHour(int inputHour) {

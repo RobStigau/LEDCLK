@@ -18,6 +18,8 @@ class DisplayManager {
 
         void clear();
 
+        void drawAlarmOff();
+
         void drawColor(int colorMenuIndex, bool colorOne, bool colorTwo, bool colorThree, bool colorFour, bool colorFive, bool colorSix);
         
         void drawAlarm(int AlarmMenuIndex, int hour, int minute, int AM_PM);
