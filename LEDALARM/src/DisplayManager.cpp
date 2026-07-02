@@ -59,7 +59,7 @@ void DisplayManager::drawAlarmOff() {
     tft.fillScreen(TFT_BLACK);
     tft.setTextDatum(MC_DATUM);
     tft.setTextFont(4);
-    tft.setTextSize(4);
+    tft.setTextSize(2);
     tft.drawString("PRESS TO TURN OFF ALARM", 220, 140);
 
 
@@ -335,21 +335,21 @@ void DisplayManager::drawSetClock(int setClockMenuIndex, int setHour, int setMin
 void DisplayManager::drawMainMenu(int menuIndex, int hour, int minute, bool AM_PM) {
     tft.fillScreen(TFT_BLACK);
     tft.setTextFont(4);
-    tft.setTextSize(4);
+    tft.setTextSize(3);
     if (hour < 10) {
         if (minute < 10) {
-            tft.drawString("0 " + String(hour) + " : " + "0 " + String(minute), 160, 160);
+            tft.drawString("0 " + String(hour) + " : " + "0 " + String(minute), 160, 180);
         }
         else {
-        tft.drawString("0 " + String(hour) + " : " + String(minute), 160, 160);
+        tft.drawString("0 " + String(hour) + " : " + String(minute), 160, 180);
         }
     }
     else if (minute < 10) {
-        tft.drawString(String(hour) + " : " + "0 " + String(minute), 160, 160);
+        tft.drawString(String(hour) + " : " + "0 " + String(minute), 160, 180);
 
     }
     else {
-        tft.drawString(String(hour) + " : " + String(minute), 160, 160);
+        tft.drawString(String(hour) + " : " + String(minute), 160, 180);
     }
     tft.setTextSize(1);
     if (AM_PM) {

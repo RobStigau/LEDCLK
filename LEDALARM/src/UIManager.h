@@ -70,6 +70,8 @@ class UIManager {
 
         void setView(View view);
 
+        bool isInAlarmMenu() const;
+
 
         int getAlarmHour() const;
 

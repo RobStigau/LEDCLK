@@ -49,7 +49,7 @@ void loop() {
                                   lastAlarmMinute == ClockBody.getMinute() &&
                                   lastAlarmAM_PM == ClockBody.getAM_PM();
 
-  if (alarmTimeMatches && !alreadyTriggeredInMinute) {
+  if (alarmTimeMatches && !alreadyTriggeredInMinute && !ui.isInAlarmMenu()) {
     sender.send(
       ui.getColor(),
       ui.getBrightnessLevel(),
