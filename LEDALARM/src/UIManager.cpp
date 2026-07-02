@@ -597,3 +597,8 @@ void UIManager::setView(View newView) {
 bool UIManager::isInAlarmMenu() const {
     return currentView == View::ALARM_MENU;
 }
+
+
+View UIManager::getView() const {
+    return currentView;
+}

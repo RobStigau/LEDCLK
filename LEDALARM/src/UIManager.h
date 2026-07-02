@@ -87,5 +87,7 @@ class UIManager {
 
         bool isAlarmSent() const;
 
+        View getView() const;
+
 
 };

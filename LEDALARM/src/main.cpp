@@ -78,7 +78,10 @@ void loop() {
   }
   bool buttonPress = encoder->buttonPressed();
   if (buttonPress) {
-    delay(100);
+
+    if (ui.getView() == View::ALARM_OFF_MENU) {
+      sender.send(0, 0, 0);
+    }
     ui.handlePress(ClockBody);
     ui.draw(display, ClockBody);
   }
